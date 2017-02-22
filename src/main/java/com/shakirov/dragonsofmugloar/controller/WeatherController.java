@@ -1,4 +1,4 @@
-package com.shakirov.dragonsofmugloar.Controller;
+package com.shakirov.dragonsofmugloar.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.shakirov.dragonsofmugloar.Entity;
+package com.shakirov.dragonsofmugloar.entity;
 
 /**
  *
