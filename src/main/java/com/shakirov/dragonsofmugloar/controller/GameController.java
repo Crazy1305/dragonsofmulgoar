@@ -1,6 +1,8 @@
-package com.shakirov.dragonsofmugloar.Controller;
+package com.shakirov.dragonsofmugloar.controller;
 
-import com.shakirov.dragonsofmugloar.Entity.Game;
+import com.google.gson.Gson;
+import com.shakirov.dragonsofmugloar.entity.Game;
+import com.shakirov.dragonsofmugloar.entity.GameResult;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,8 +24,7 @@ public class GameController {
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()));
         String response = reader.readLine();
-        Game game = (Game)GsonObjectParser.toObject(response, Game.class);
         reader.close();
-        return game;
+        return new Gson().fromJson(response, Game.class);
     }
 }

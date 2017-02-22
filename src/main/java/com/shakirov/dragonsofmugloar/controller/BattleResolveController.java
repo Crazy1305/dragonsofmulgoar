@@ -1,8 +1,9 @@
-package com.shakirov.dragonsofmugloar.Controller;
+package com.shakirov.dragonsofmugloar.controller;
 
-import com.shakirov.dragonsofmugloar.Entity.Dragon;
-import com.shakirov.dragonsofmugloar.Entity.Game;
-import com.shakirov.dragonsofmugloar.Entity.GameResult;
+import com.google.gson.Gson;
+import com.shakirov.dragonsofmugloar.entity.Dragon;
+import com.shakirov.dragonsofmugloar.entity.Game;
+import com.shakirov.dragonsofmugloar.entity.GameResult;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -34,8 +35,9 @@ public class BattleResolveController {
         connection.setRequestProperty("Content-Type", "Application/json");
         connection.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        System.out.println(GsonObjectParser.toJson(dragon));
-        wr.writeBytes(GsonObjectParser.toJson(dragon));
+        DragonClassSerializer dragonSerializer = new DragonClassSerializer(dragon);
+        System.out.println(dragonSerializer.toJson());
+        wr.writeBytes(dragonSerializer.toJson());
         wr.flush();
         wr.close();            
         
@@ -43,7 +45,7 @@ public class BattleResolveController {
                 new InputStreamReader(connection.getInputStream()));
         String response = reader.readLine();
         reader.close();
-        return (GameResult)GsonObjectParser.toObject(response, GameResult.class);
+        return new Gson().fromJson(response, GameResult.class);
     }
     
 }
